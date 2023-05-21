@@ -1,0 +1,91 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>Movie Recommendations</title>
+</head>
+<body>
+    <h1>Movie Recommendations for "{{ movie_name }}"</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Movie Title</th>
+                <th>Correlation</th>
+                <th>No. of Ratings</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for prediction in predictions.iterrows() %}
+            <tr>
+                <td>{{ prediction[1]['title'] }}</td>
+                <td>{{ prediction[1]['Correlation'] }}</td>
+                <td>{{ prediction[1]['no. of ratings'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>Movie Recommendation System</title>
+</head>
+<body>
+    <h1>Movie Recommendation System</h1>
+    <form action="/recommend" method="post">
+        <label for="movie_name">Select a movie:</label>
+        <select id="movie_name" name="movie_name">
+            {% for movie_title in movie_titles %}
+                <option value="{{ movie_title }}">{{ movie_title }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Recommend">
+    </form>
+    <h2>Recommendations for {{ movie_name }}</h2>
+    <ul>
+        {% for index, row in predictions.iterrows() %}
+            <li>{{ row.name }} (Correlation: {{ row['Correlation'] }})</li>
+        {% endfor %}
+    </ul -->
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Movie Recommendation System - Recommendations</title>
+    </head>
+    <body>
+        <h1>Movie Recommendation System</h1>
+        <h2>Recommendations for {{ movie_name }}</h2>
+        <ul>
+            {% for index, row in predictions.iterrows() %}
+                <li>{{ row.name }} </li>
+            {% endfor %}
+        </ul>
+    </body>
+    </html>
+    
+    <!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>Movie Recommendation System - Recommendations</title>
+    <style>
+        .movie-poster {
+            width: 200px;
+            height: 300px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Movie Recommendation System</h1>
+    <h2>Recommendations for {{ movie_name }}</h2>
+    <ul>
+        {% for index, row in predictions.iterrows() %}
+            <li>
+                <img class="movie-poster" src="{{ url_for('static', filename='posters/' + index + '.jpg') }}" alt="{{ row.name }}">
+                <p>{{ row.name }} (Correlation: {{ row['Correlation'] }})</p>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html> -->
