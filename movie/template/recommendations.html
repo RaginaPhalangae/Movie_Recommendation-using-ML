@@ -1,91 +1,132 @@
-<!-- <!DOCTYPE html>
-<html>
-<head>
-    <title>Movie Recommendations</title>
-</head>
-<body>
-    <h1>Movie Recommendations for "{{ movie_name }}"</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Movie Title</th>
-                <th>Correlation</th>
-                <th>No. of Ratings</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for prediction in predictions.iterrows() %}
-            <tr>
-                <td>{{ prediction[1]['title'] }}</td>
-                <td>{{ prediction[1]['Correlation'] }}</td>
-                <td>{{ prediction[1]['no. of ratings'] }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</body>
-</html> -->
-
-<!-- <!DOCTYPE html>
-<html>
-<head>
-    <title>Movie Recommendation System</title>
-</head>
-<body>
-    <h1>Movie Recommendation System</h1>
-    <form action="/recommend" method="post">
-        <label for="movie_name">Select a movie:</label>
-        <select id="movie_name" name="movie_name">
-            {% for movie_title in movie_titles %}
-                <option value="{{ movie_title }}">{{ movie_title }}</option>
-            {% endfor %}
-        </select>
-        <input type="submit" value="Recommend">
-    </form>
-    <h2>Recommendations for {{ movie_name }}</h2>
-    <ul>
-        {% for index, row in predictions.iterrows() %}
-            <li>{{ row.name }} (Correlation: {{ row['Correlation'] }})</li>
-        {% endfor %}
-    </ul -->
-
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>Movie Recommendation System - Recommendations</title>
-    </head>
-    <body>
-        <h1>Movie Recommendation System</h1>
-        <h2>Recommendations for {{ movie_name }}</h2>
-        <ul>
-            {% for index, row in predictions.iterrows() %}
-                <li>{{ row.name }} </li>
-            {% endfor %}
-        </ul>
-    </body>
-    </html>
-    
-    <!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <title>Movie Recommendation System - Recommendations</title>
     <style>
-        .movie-poster {
-            width: 200px;
-            height: 300px;
-        }
-    </style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #d6f3ff;
+}
+
+.title {
+    text-align: center;
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+}
+
+.subtitle {
+    text-align: center;
+    margin-top: 70px;
+}
+
+.label {
+    display: block;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.select {
+    padding: 5px;
+    width: 200px;
+    margin-bottom: 10px;
+}
+
+.button {
+    background-color: #343434;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.recommendations {
+    list-style: none;
+    /* padding: 50px; */
+  /* margin: auto; */
+  /* margin-top: 100px; */
+  margin-left: 350px;
+  width: 50%;
+  /* border: 3px solid green; */
+  padding: 40px;
+}
+
+.recommendations li {
+    /* margin-bottom: 10px;
+    padding: 50px; */
+    margin-bottom: 10px;
+    padding: 20px;
+    font-style: italic;
+    font-size: 20px;
+    font-family: fantasy;
+}
+
+
+</style>
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- Reset CSS -->
+<link href="{{ url_for('static', filename='reset.css') }}" rel="stylesheet" type="text/css" />
+<!--Import Google Icon Font-->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+<!--Import materialize.css-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+<!-- Custom CSS -->
+<link href="{{ url_for('static', filename='style_index.css') }}" rel="stylesheet" type="text/css" />
 </head>
+
 <body>
-    <h1>Movie Recommendation System</h1>
-    <h2>Recommendations for {{ movie_name }}</h2>
-    <ul>
+    <!-- <h1 class="title">Movie Recommendation System</h1> -->
+
+    <nav class="indigo darken-3">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="#" class="bold flow-text fontSize">Better Movie Selection</a>
+                <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                <ul class="right hide-on-med-and-down">
+                    <form action="/home" method="post" style="height: max-content; width: max-content;">
+                        <li><button class="btn">HomePage</button></li>
+                    </form>
+                    <form action="/feedback" method="post" style="height: max-content; width: max-content;">
+                        <li><button class="btn">FeedBack</button></li>
+                    </form>
+                </ul>
+                <ul class="sidenav blue lighten-5" id="mobile-demo">
+                    <form action="/feedback" method="post">
+                        <li><button>FeedBack</button></li>
+                    </form>
+                    <form action="/home" method="post">
+                        <li><button>HomePage</button></li>
+                    </form>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+    <h4 font-weight: bold; class="subtitle">Recommendations for {{ movie_name }}</h4>
+   <div id="re">
+    <ul class="recommendations">
         {% for index, row in predictions.iterrows() %}
-            <li>
-                <img class="movie-poster" src="{{ url_for('static', filename='posters/' + index + '.jpg') }}" alt="{{ row.name }}">
-                <p>{{ row.name }} (Correlation: {{ row['Correlation'] }})</p>
-            </li>
+        <li>{{ row.name }} </li>
         {% endfor %}
     </ul>
+    </div>
+    </main>
+
+
+    <footer class="page-footer indigo darken-3">
+        <div class="footer-copyright center">
+            <div class="container center-align">
+                © 2023 Group 4 - Project 1
+            </div>
+        </div>
+    </footer>
 </body>
-</html> -->
+
+</html>
